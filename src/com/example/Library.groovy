@@ -41,7 +41,7 @@ def dockerBuild(Map args) {
 
 def dockerTag(Map args) {
 
-  docker tag ${args.imageName}:${args.imageTag} ${args.targetImageName}:${args.targetImageTag}
+  sh "docker tag ${args.imageName}:${args.imageTag} ${args.targetImageName}:${args.targetImageTag}"
 }
 
 /*
