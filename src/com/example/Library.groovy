@@ -1,3 +1,5 @@
+package com.example
+
 def getSuccessfulBuildsMap(currentBuild) {
   def successfulBuilds = [:];
   lastSuccessfullBuild(currentBuild.getPreviousBuild(), successfulBuilds)
