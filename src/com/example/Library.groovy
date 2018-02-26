@@ -26,8 +26,8 @@ private def lastSuccessfullBuild(build, successfulBuilds) {
 
 //Reference https://gist.github.com/ftclausen/8c46195ee56e48e4d01cbfab19c41fc0
 @NonCPS
-private def getCommitHash(rawBuild) {
-  def rawBuild = currentBuild.rawBuild
+private def getCommitHash(build) {
+  def rawBuild = build.rawBuild
   def scmAction = rawBuild?.actions.find { action -> action instanceof jenkins.scm.api.SCMRevisionAction }
   scmAction?.revision?.hash
 }
