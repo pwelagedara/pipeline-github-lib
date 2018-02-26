@@ -2,9 +2,8 @@ package com.example
 
 // Add Successful Builds to a Map and return
 def getSuccessfulBuildsMap(currentBuild) {
-  def successfulBuilds = [:];
-  lastSuccessfullBuild(currentBuild.getPreviousBuild(), successfulBuilds)
-  return successfulBuilds;
+  def successfulBuilds = lastSuccessfullBuild(currentBuild.getPreviousBuild(), [:])
+  return successfulBuilds
 }
 
 // Reference https://support.cloudbees.com/hc/en-us/articles/217591038-How-to-Iterate-Through-the-Last-Successful-Builds-in-Pipeline-Job
