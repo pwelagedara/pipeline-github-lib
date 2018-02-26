@@ -15,8 +15,8 @@ def getSuccessfulBuildsMap(currentBuild) {
 private def lastSuccessfullBuild(build, successfulBuilds) {
     if(build != null){
         if(build.result == 'SUCCESS') {
-            def commitHash = getCommitHash(build).substring(0, 7)
-            successfulBuilds.put(build.number, commitHash) // Short Version of the Hash
+            def commitHash = getCommitHash(build).substring(0, 7) // Short Version of the Hash
+            successfulBuilds.put(build.number, commitHash)
         }
         lastSuccessfullBuild(build.getPreviousBuild(), successfulBuilds)
     }else {
