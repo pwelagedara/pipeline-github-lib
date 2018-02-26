@@ -1,5 +1,6 @@
 package com.example
 
+// Add Successful Builds to a Map and return
 def getSuccessfulBuildsMap(currentBuild) {
   def successfulBuilds = [:];
   lastSuccessfullBuild(currentBuild.getPreviousBuild(), successfulBuilds)
@@ -12,7 +13,7 @@ def lastSuccessfullBuild(build, successfulBuilds) {
         if(build.result == 'SUCCESS') {
             successfulBuilds.put(getCommitHash(build), build)
         }
-        lastSuccessfullBuild(build.getPreviousBuild(), passedBuilds)
+        lastSuccessfullBuild(build.getPreviousBuild(), successfulBuilds)
     }
  }
 
