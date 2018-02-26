@@ -14,6 +14,8 @@ def lastSuccessfullBuild(build, successfulBuilds) {
             successfulBuilds.put(getCommitHash(build), build)
         }
         lastSuccessfullBuild(build.getPreviousBuild(), successfulBuilds)
+    }else {
+      return successfulBuilds;
     }
  }
 
