@@ -3,6 +3,8 @@ package com.example
 // Add Successful Builds to a Map and return
 def getSuccessfulBuildsMap(currentBuild) {
   def successfulBuilds = lastSuccessfullBuild(currentBuild.getPreviousBuild(), [:])
+  println 'sizeeee'
+  println successfulBuilds.size()
   return successfulBuilds
 }
 
@@ -15,7 +17,7 @@ def lastSuccessfullBuild(build, successfulBuilds) {
         }
         lastSuccessfullBuild(build.getPreviousBuild(), successfulBuilds)
     }else {
-      return successfulBuilds;
+      return successfulBuilds
     }
  }
 
