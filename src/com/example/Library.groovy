@@ -1,6 +1,6 @@
 def getSuccessfulBuildsMap(currentBuild) {
   def successfulBuilds = [:];
-  lastSuccessfullBuild(currentBuild, successfulBuilds)
+  lastSuccessfullBuild(currentBuild.getPreviousBuild(), successfulBuilds)
   return successfulBuilds;
 }
 
