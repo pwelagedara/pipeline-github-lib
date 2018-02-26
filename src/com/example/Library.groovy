@@ -13,7 +13,7 @@ def lastSuccessfullBuild(build, successfulBuilds) {
     if(build != null){
         if(build.result == 'SUCCESS') {
             println 'okayyyyyyyyy'
-            successfulBuilds.put(getCommitHash(build), build)
+            successfulBuilds.put(build.number, getCommitHash(build))
         }
         lastSuccessfullBuild(build.getPreviousBuild(), successfulBuilds)
     }else {
