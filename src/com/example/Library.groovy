@@ -15,7 +15,8 @@ def getSuccessfulBuildsMap(currentBuild) {
 private def lastSuccessfullBuild(build, successfulBuilds) {
     if(build != null){
         if(build.result == 'SUCCESS') {
-            successfulBuilds.put(build.number, getCommitHash(build).substring(0, 7)) // Short Version of the Hash
+            def commitHash = getCommitHash(build.rawBuild).substring(0, 7)
+            successfulBuilds.put(build.number, commitHash) // Short Version of the Hash
         }
         lastSuccessfullBuild(build.getPreviousBuild(), successfulBuilds)
     }else {
@@ -25,8 +26,8 @@ private def lastSuccessfullBuild(build, successfulBuilds) {
 
 //Reference https://gist.github.com/ftclausen/8c46195ee56e48e4d01cbfab19c41fc0
 @NonCPS
-private def getCommitHash(build) {
-  def rawBuild = currentBuild.rawBuild
+private def getCommitHash(rawBuild) {
+  //def rawBuild = currentBuild.rawBuild
   def scmAction = rawBuild?.actions.find { action -> action instanceof jenkins.scm.api.SCMRevisionAction }
   scmAction?.revision?.hash
 }
