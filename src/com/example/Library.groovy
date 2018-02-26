@@ -1,54 +1,23 @@
-package com.example
-
-/*
-Git Functions
-*/
-
-def getCommitHash() {
-
-  sh "git rev-parse --short HEAD > commit-hash.txt"
-  readFile('commit-hash.txt').trim()
+def getSuccessfulBuildsMap(currentBuild) {
+  def successfulBuilds = [:];
+  lastSuccessfullBuild(currentBuild, successfulBuilds)
+  return successfulBuilds;
 }
 
-// You do not need this for Multibranch Pipeline Projects
-def getCurrentBranch() {
+// Reference https://support.cloudbees.com/hc/en-us/articles/217591038-How-to-Iterate-Through-the-Last-Successful-Builds-in-Pipeline-Job
+def lastSuccessfullBuild(build, successfulBuilds) {
+    if(build != null){
+        if(build.result == 'SUCCESS') {
+            successfulBuilds.put(getCommitHash(build), build)
+        }
+        lastSuccessfullBuild(build.getPreviousBuild(), passedBuilds)
+    }
+ }
 
-  sh "git rev-parse --abbrev-ref HEAD > current-branch.txt"
-  readFile('current-branch.txt').trim()
-}
-
-/*
-Docker Functions
-*/
-
-def dockerTest() {
-
-  sh "docker --version";
-}
-
-def dockerBuild(Map args) {
-
-  def path
-
-  if (args.path == null) {
-      path = "./"
-  } else {
-      path = args.path
-  }
-
-  sh "docker build -t ${args.imageName}:${args.imageTag} ${path}"
-}
-
-def dockerTag(Map args) {
-
-  sh "docker tag ${args.imageName}:${args.imageTag} ${args.targetImageName}:${args.targetImageTag}"
-}
-
-/*
-Helm Functions
-*/
-
-def helmTest() {
-
-  sh "helm list"
+//Reference https://gist.github.com/ftclausen/8c46195ee56e48e4d01cbfab19c41fc0
+@NonCPS
+def getCommitHash(build) {
+  def rawBuild = currentBuild.rawBuild
+  def scmAction = rawBuild?.actions.find { action -> action instanceof jenkins.scm.api.SCMRevisionAction }
+  return scmAction?.revision?.hash
 }
