@@ -1,3 +1,5 @@
+#! /usr/bin/groovy
+
 package com.example
 
 // Add Successful Builds to a Map and return
