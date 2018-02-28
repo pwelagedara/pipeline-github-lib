@@ -18,7 +18,8 @@ def setEnvironmentVariables() {
       env.SKIP_STAGE_PUBLISH=true
   } else {
     // Skip everything
-    env.SKIP_STAGE_PREBUILD=true
+    env.SKIP_STAGE_PREBUILD_GCLOUD=true
+    env.SKIP_STAGE_PREBUILD_HELM=true
     env.SKIP_STAGE_BUILD=true
     env.SKIP_STAGE_DOCKERIZE=true
     env.SKIP_STAGE_PUBLISH=true
