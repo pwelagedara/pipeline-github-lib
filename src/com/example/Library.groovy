@@ -2,6 +2,21 @@
 
 package com.example
 
+
+def setEnvironmentVariables() {
+  if (env.ENVIRONMENT == 'qa' && env.BRANCH_NAME == 'dev') { // Dev Branch always goes to qa
+    // None of the variables need to be changed
+  }else if(env.ENVIRONMENT == 'staging' && env.BRANCH_NAME.startsWith("release-")) { // Release Branch always goes to staging
+    // None of the variables need to be changed
+  } else if () { // PRs will skip stages from Dry Run onwards because the app is already in qa and staging
+        env.SKIP_STAGE_PUBLISH=true
+        env.SKIP_STAGE_DRY_RUN=true
+        env.SKIP_STAGE_DEPLOY=true
+  } else {
+    // Skip nothing
+  }
+}
+
 // Add Successful Builds to a Map and return
 /* Needs the following scripts to be approved
 *  method hudson.model.Actionable getActions
