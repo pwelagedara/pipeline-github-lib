@@ -8,7 +8,7 @@ def setEnvironmentVariables() {
     // None of the variables need to be changed
   }else if(env.ENVIRONMENT == 'staging' && env.BRANCH_NAME.startsWith("release-")) { // Release Branch always goes to staging
     // None of the variables need to be changed
-  } else if (env.BRANCH_NAME =~ "PR-*") { // PRs will skip stages from Dry Run onwards because the app is already in qa and staging. Tweak this from Jenkins
+  }else if (env.BRANCH_NAME =~ "PR-*") { // PRs will skip stages from Dry Run onwards because the app is already in qa and staging. Tweak this from Jenkins
       env.SKIP_STAGE_PUBLISH=true
       env.SKIP_STAGE_DRY_RUN=true
       env.SKIP_STAGE_DEPLOY=true
@@ -16,7 +16,7 @@ def setEnvironmentVariables() {
       env.SKIP_STAGE_BUILD=true
       env.SKIP_STAGE_DOCKERIZE=true
       env.SKIP_STAGE_PUBLISH=true
-  } else {
+  }else {
     // Skip everything
     env.SKIP_STAGE_PREBUILD_GCLOUD=true
     env.SKIP_STAGE_PREBUILD_HELM=true
