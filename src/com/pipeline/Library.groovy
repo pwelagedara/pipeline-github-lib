@@ -1,6 +1,6 @@
 #! /usr/bin/groovy
 
-package com.example
+package com.pipeline
 
 
 def setEnvironmentVariables() {
